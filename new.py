@@ -3,7 +3,7 @@ import pickle
 import streamlit as st
 from streamlit_option_menu import option_menu
 
-st.set_page_config(page_title="Health Prediction App",
+st.set_page_config(page_title="Diseases Prediction App",
                    layout="wide",
                    page_icon="❤️‍🩹")
 
@@ -48,7 +48,7 @@ font = "serif"
 # )
 # sidebar for navigation 
 with st.sidebar:
-    selected = option_menu('Health Prediction App',
+    selected = option_menu('Diseases Prediction App',
                            ['Diabetes(मधुमेह) Prediction',
                             'Heart Disease(हृदय रोग) Prediction',
                             'Parkinsons(पार्किंसंस रोग) Prediction',
@@ -91,19 +91,19 @@ if selected == 'Diabetes(मधुमेह) Prediction':
     if st.button('Diabetes Test Result'):
         user_input = [Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]
         if ( BloodPressure >= 160 ): 
-            bpnow = 'Your Blood pressure is high\n'
+            bpnow = 'Your Blood pressure is high||Diet: Eating a healthy, low-fat, balanced diet with less salt and more potassium, and limiting alcohol||Stress: Managing stress through meditation, yoga, or other relaxation techniques\\\\\\आपका रक्तचाप उच्च है ||आहार: कम नमक और अधिक पोटेशियम के साथ स्वस्थ, कम वसा वाला, संतुलित आहार लेना, और शराब को सीमित करना ध्यान, योग या अन्य विश्राम तकनीकों के माध्यम से तनाव का प्रबंधन करना'
         else:
-            bpnow='Your Blood pressure is Normal\n' 
+            bpnow='Your Blood pressure is Normal\nआपका रक्तचाप सामान्य है' 
         if ( Insulin >= 270 ): 
-           insuli = 'Your Insulin is high\n'
+           insuli = 'Your Insulin is high||Follow a lower carb eating plan||Consider supplementing with apple cider vinegar||Keep an eye on portion sizes||Lower your intake of all forms of sugar||Prioritize physical activity\\\\\\आपका इंसुलिन उच्च है || कम कार्ब खाने की योजना का पालन करें||सेब साइडर सिरका के पूरक पर विचार करें||भाग के आकार पर नज़र रखें||सभी प्रकार की चीनी का सेवन कम करें|| शारीरिक गतिविधि को प्राथमिकता दें'
         else:
-            insuli='Your Insulin is Normal\n'
-        if ( Glucose >= 160 ): 
-            glnow = 'Your Glucose is high\n'
+            insuli='Your Insulin is Normal\nआपका इंसुलिन सामान्य है'
+        if ( Glucose >= 105 ): 
+            glnow = 'Your Glucose is high\n||Follow a lower carb eating plan||Consider supplementing with apple cider vinegar||Keep an eye on portion sizes||Lower your intake of all forms of sugar||Prioritize physical activity\\\\\\आपका ग्लूकोज़ उच्च है || कम कार्ब खाने की योजना का पालन करें||सेब साइडर सिरका के पूरक पर विचार करें||भाग के आकार पर नज़र रखें||सभी प्रकार की चीनी का सेवन कम करें|| शारीरिक गतिविधि को प्राथमिकता दें'
         else:
-           glnow='Your Glucose is Normal\n' 
+           glnow='Your Glucose is Normal\nआपका ग्लूकोज़ सामान्य है' 
         diab_prediction = diabetes_model.predict([user_input])
-        diab_diagnosis = 'The person is diabetic' if diab_prediction[0] == 1 else 'The person is not diabetic'
+        diab_diagnosis = 'The person is diabetic व्यक्ति मधुमेह रोगी है' if diab_prediction[0] == 1 else 'The person is not diabetic व्यक्ति मधुमेह रोगी नहीं है'
     st.success(diab_diagnosis)
     st.success(bpnow)
     st.success(insuli)
@@ -141,7 +141,7 @@ if selected == 'Heart Disease(हृदय रोग) Prediction':
         user_input = [age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal]
         heart_prediction = heart_disease_model.predict([user_input])
         if ( restecg >= 160 ): 
-            bpnow = 'Your Blood pressure is high\n'
+            bpnow = 'Your Blood pressure is high\n Diet: Eating a healthy, low-fat, balanced diet with less salt and more potassium, and limiting alcohol\nStress: Managing stress through meditation, yoga, or other relaxation techniques'
         else:
             bpnow='Your Blood pressure is Normal\n'  
         if (heart_prediction[0] == 1 ):
